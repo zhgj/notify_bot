@@ -23,7 +23,7 @@ from webrequest.HttpRequest import HttpRequest
 
 # 基本路径
 base_dir = r'D:\notify_bot'
-apprise_config = r'C:\Users\zhanggaojiong\AppData\Roaming\Apprise\apprise'
+apprise_config = r'C:\Users\zhangsan\AppData\Roaming\Apprise\apprise'
 iciba_path_dir = base_dir + r'\iciba'
 screenshot_path = base_dir + r'\screenshot'
 
@@ -177,16 +177,19 @@ def get_notift_text():
     # 获取窗口的位置和大小
     x, y, width, height = window.left, window.top, window.width, window.height
 
+    # 窗体左侧和上侧不需要的宽度
     x2 = 60
     y2 = 90
 
+    # 窗体右侧和下侧不需要的宽度
     x_right = 20
     y_down = 120
 
+    # 截图左上角坐标
     x = x+x2
     y = y+y2
 
-    # 根据窗口的位置和大小进行截图
+    # 根据位置和大小进行截图
     time.sleep(1) # 截图前暂停一下，防止截图模糊造成识别错误
     screenshot = ImageGrab.grab(bbox=(x, y, x + width-x2-x_right, y + height-y2-y_down))
 
@@ -351,12 +354,14 @@ try:
             # 计算未来时间和当前时间之间的差值（使用relativedelta得到更精确的年份差）  
             year_difference = relativedelta(dt_result[1], current_time).years
             if  year_difference >= 1:
-                print(str(datetime.now()) + ' 时间超过一年')
+                print(str(datetime.now()) + ' 提醒时间超过一年')
                 continue
 
             scheduler.add_job(func=send_remind_text, args=[title,date_time_string], trigger="date", run_date=dt_result[1], jobstore='redis')
+            # 同样的事情五分内不能重复提醒
             redis_conn.setex(title, 300, date_time_string)
             print(str(datetime.now()) + ' 已设置提醒：' + date_time_string + ' ' + title)
+            # 定时设置成功，发送回执消息
             send_remind_text('['+title+']已设置','已设置：' + date_time_string + ' 提醒 ' + title)
         except Exception as e:
             # 如果发生异常，捕获它并记录日志
