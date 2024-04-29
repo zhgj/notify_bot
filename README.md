@@ -34,21 +34,21 @@
 
 # 依赖软件
 
-**QQ**
-**[Tesseract OCR](https://github.com/UB-Mannheim/tesseract/wiki)**
-**[Apprise](https://github.com/caronc/apprise)**
-**Python**：版本3.9+吧，因为我用的就是3.9
-**Redis**
+* **QQ**
+* **[Tesseract OCR](https://github.com/UB-Mannheim/tesseract/wiki)**
+* **[Apprise](https://github.com/caronc/apprise)**
+* **Python**：版本3.9+吧，因为我用的就是3.9
+* **Redis**
 
-当然这里还有一堆需要 `pip install xxxx`的，拿到源码自己跑一下，缺啥装啥吧（认真的，我都忘记自己装过啥了，看下）
+当然这里还有一堆需要 `pip install xxxx`的，拿到源码自己跑一下，缺啥装啥吧（认真的，我都忘记自己装过啥了）
 
 哈哈，用的其他依赖还不少吧
 
 # 关键点
 
-重点来了
-重点来了
-重点来了
+* 重点来了
+* 重点来了
+* 重点来了
 
 1. 设置电脑端QQ来消息自动弹出窗口
 2. 设置电脑长时间后不要锁屏，电源选项改为：从不，还有锁屏程序选择：无
